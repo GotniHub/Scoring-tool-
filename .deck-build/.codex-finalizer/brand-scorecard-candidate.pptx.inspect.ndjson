@@ -1,0 +1,161 @@
+{"kind":"deck","id":"pr/rwbpz3","name":"Deck"}
+{"kind":"layout","layoutId":"d2d9e7c0-565d-496e-91d9-4c5d28f911af","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"a8fe80eb-8cdb-44b3-af8d-45613bb9b2d3","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/o6364l","slide":1,"title":"Brand Scorecard","textShapes":6}
+{"kind":"shape","id":"sh/y5wri1kr","slide":1,"bbox":[760,0,520,720]}
+{"kind":"textbox","id":"sh/0re9kb2x","slide":1,"text":"Brand Scorecard","textPreview":"Brand Scorecard","textChars":15,"textLines":1,"bbox":[62,212,650,86]}
+{"kind":"textbox","id":"sh/nupsvq1o","slide":1,"text":"A practical tool for brand assessment and portfolio decisions","textPreview":"A practical tool for brand assessment and portfolio decisions","textChars":61,"textLines":1,"bbox":[64,317,610,100]}
+{"kind":"textbox","id":"sh/mtgrmlk3","slide":1,"text":"Project presentation","textPreview":"Project presentation","textChars":20,"textLines":1,"bbox":[64,548,420,28]}
+{"kind":"textbox","id":"sh/9w7axgje","slide":1,"text":"September 2026","textPreview":"September 2026","textChars":14,"textLines":1,"bbox":[64,588,300,28]}
+{"kind":"textbox","id":"sh/8vy9ov29","slide":1,"text":"ASSESS\nCOMPARE\nDECIDE","textPreview":"ASSESS | COMPARE | DECIDE","textChars":21,"textLines":3,"bbox":[818,182,380,260]}
+{"kind":"shape","id":"sh/vypszq1k","slide":1,"bbox":[818,478,230,4]}
+{"kind":"textbox","id":"sh/uxgrqlkz","slide":1,"text":"One shared scoring method\nOne persistent data source","textPreview":"One shared scoring method | One persistent data source","textChars":52,"textLines":2,"bbox":[818,505,350,80]}
+{"kind":"image","id":"im/ov6147at","slide":1,"name":"","alt":"Advent+ Africa logo","bbox":[62,52,300,72]}
+{"kind":"notes","id":"nt/o6364l","slide":1,"text":"Today I will present the Brand Scorecard. It gives the commercial team one place to assess brands, compare results, and support portfolio decisions. The tool combines a clear scoring method with a database, dashboards, and export options. I will show the full user journey and explain how the data stays available between sessions.\n\nSource: Brand Scorecard application v2.5."}
+{"kind":"slide","id":"sl/ybu2bv","slide":2,"title":"BUSINESS NEED","textShapes":15}
+{"kind":"shape","id":"sh/ud03ud0f","slide":2,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/hgrmp8z6","slide":2,"text":"BUSINESS NEED","textPreview":"BUSINESS NEED","textChars":13,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/gfilw3il","slide":2,"text":"Why the project was needed","textPreview":"Why the project was needed","textChars":26,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/3it4rihw","slide":2,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/ih03yd0b","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"textbox","id":"sh/5kbmtsz2","slide":2,"text":"The starting point","textPreview":"The starting point","textChars":18,"textLines":1,"bbox":[70,165,500,38]}
+{"kind":"textbox","id":"sh/4j2l0nih","slide":2,"text":"Brand information was spread across files and personal notes.\nTeams needed a consistent way to compare very different brands.\nManual updates made follow-up slow and difficult to trace.\nManagement needed a clear view of priorities and risks.","textPreview":"Brand information was spread across files and personal notes. | Teams needed a consistent way to compare very different brands. | Manual ...","textChars":240,"textLines":4,"bbox":[70,218,510,330]}
+{"kind":"shape","id":"sh/rmt4vih8","slide":2,"bbox":[630,160,2,430]}
+{"kind":"textbox","id":"sh/qlk32x0n","slide":2,"text":"The project response","textPreview":"The project response","textChars":20,"textLines":1,"bbox":[690,165,500,38]}
+{"kind":"textbox","id":"sh/cfyl4rm9","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[690,225,70,42]}
+{"kind":"textbox","id":"sh/xg7mxw3e","slide":2,"text":"Structured assessment","textPreview":"Structured assessment","textChars":21,"textLines":1,"bbox":[770,225,390,34]}
+{"kind":"textbox","id":"sh/atg32h43","slide":2,"text":"The same questions and scales for every brand.","textPreview":"The same questions and scales for every brand.","textChars":46,"textLines":1,"bbox":[770,263,390,56]}
+{"kind":"textbox","id":"sh/bupkvmlo","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[690,343,70,42]}
+{"kind":"textbox","id":"sh/kjyl8rm5","slide":2,"text":"Persistent data","textPreview":"Persistent data","textChars":15,"textLines":1,"bbox":[770,343,390,34]}
+{"kind":"textbox","id":"sh/lk7m1w3q","slide":2,"text":"Every saved assessment returns in the next session.","textPreview":"Every saved assessment returns in the next session.","textChars":51,"textLines":1,"bbox":[770,381,390,56]}
+{"kind":"textbox","id":"sh/yhg3614z","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[690,461,70,42]}
+{"kind":"textbox","id":"sh/zip4zmlk","slide":2,"text":"Decision views","textPreview":"Decision views","textChars":14,"textLines":1,"bbox":[770,461,390,34]}
+{"kind":"textbox","id":"sh/8nilcbm1","slide":2,"text":"Scores, recommendations, comparisons, and exports.","textPreview":"Scores, recommendations, comparisons, and exports.","textChars":50,"textLines":1,"bbox":[770,499,390,56]}
+{"kind":"notes","id":"nt/ybu2bv","slide":2,"text":"The project started with a simple business problem. Brand information was stored in different files, and it was hard to compare brands in the same way. The new application creates one structured process. It keeps the data, calculates the scores, and gives management a clear view of each brand. This reduces manual work and makes discussions more consistent.\n\nSource: project workflow and Brand Scorecard application."}
+{"kind":"slide","id":"sl/8wipeb","slide":3,"title":"DATA CAPTURE","textShapes":6}
+{"kind":"shape","id":"sh/rul8ze58","slide":3,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/cve9sz6t","slide":3,"text":"DATA CAPTURE","textPreview":"DATA CAPTURE","textChars":12,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/dwnq14ny","slide":3,"text":"Guided brand assessment","textPreview":"Guided brand assessment","textChars":23,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/25crmpob","slide":3,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/36l8vu5w","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"textbox","id":"sh/47u9oz6h","slide":3,"text":"One form covers the full assessment","textPreview":"One form covers the full assessment","textChars":35,"textLines":1,"bbox":[64,156,420,70]}
+{"kind":"textbox","id":"sh/ps3qx4n2","slide":3,"text":"Select one or more strategic categories and brand families.\nAssign a commercial owner and an assessment status.\nComplete descriptive and strategic criteria in clear sections.\nAdd comments and evidence before saving the assessment.","textPreview":"Select one or more strategic categories and brand families. | Assign a commercial owner and an assessment status. | Complete descriptive ...","textChars":230,"textLines":4,"bbox":[64,247,390,330]}
+{"kind":"textbox","id":"sh/u1sripof","slide":3,"text":"The same screen supports new brands and later updates.","textPreview":"The same screen supports new brands and later updates.","textChars":54,"textLines":1,"bbox":[64,596,410,54]}
+{"kind":"shape","id":"sh/f218ru50","slide":3,"bbox":[487,145,734,510]}
+{"kind":"image","id":"im/wne147el","slide":3,"name":"","geometry":"roundRect","alt":"Guided brand assessment screen","bbox":[492,150,724,500]}
+{"kind":"notes","id":"nt/8wipeb","slide":3,"text":"This is the main assessment screen. The user first selects the categories and brand families. A brand can belong to more than one category or family. The commercial owner and status make responsibility clear. The assessment is divided into sections, so the user can work through the criteria in a logical order. When the user saves, the complete record goes to the database.\n\nSource: Brand Scorecard application v2.5."}
+{"kind":"slide","id":"sl/w8aeoq","slide":4,"title":"METHOD","textShapes":10}
+{"kind":"shape","id":"sh/t03mp4fu","slide":4,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/6dcnepw3","slide":4,"text":"METHOD","textPreview":"METHOD","textChars":6,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/rel4nuxo","slide":4,"text":"Transparent scoring framework","textPreview":"Transparent scoring framework","textChars":29,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/g3e5kjel","slide":4,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/14nmt4f6","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"shape","id":"sh/e1wni9wf","slide":4,"bbox":[59,145,730,510]}
+{"kind":"textbox","id":"sh/o7e5ojeh","slide":4,"text":"27","textPreview":"27","textChars":2,"textLines":1,"bbox":[835,168,150,64]}
+{"kind":"textbox","id":"sh/p87mxov2","slide":4,"text":"criteria in total","textPreview":"criteria in total","textChars":17,"textLines":1,"bbox":[835,228,300,34]}
+{"kind":"textbox","id":"sh/9g361wje","slide":4,"text":"7 descriptive criteria","textPreview":"7 descriptive criteria","textChars":22,"textLines":1,"bbox":[835,300,340,38]}
+{"kind":"textbox","id":"sh/8fup8rit","slide":4,"text":"Scores from 1 to 4","textPreview":"Scores from 1 to 4","textChars":18,"textLines":1,"bbox":[835,342,340,32]}
+{"kind":"textbox","id":"sh/nelozm18","slide":4,"text":"20 strategic criteria","textPreview":"20 strategic criteria","textChars":21,"textLines":1,"bbox":[835,414,340,38]}
+{"kind":"textbox","id":"sh/mdc76h0n","slide":4,"text":"Scores from -2 to +2","textPreview":"Scores from -2 to +2","textChars":20,"textLines":1,"bbox":[835,456,340,32]}
+{"kind":"textbox","id":"sh/xkn65gja","slide":4,"text":"Missing answers stay blank and do not change the average.","textPreview":"Missing answers stay blank and do not change the average.","textChars":57,"textLines":1,"bbox":[835,535,350,74]}
+{"kind":"image","id":"im/mh0zi9c3","slide":4,"name":"","geometry":"roundRect","alt":"Scoring framework screen","bbox":[64,150,720,500]}
+{"kind":"notes","id":"nt/w8aeoq","slide":4,"text":"The scoring method stays visible inside the application. There are seven descriptive criteria and twenty strategic criteria. The descriptive scale runs from one to four. The strategic scale runs from minus two to plus two. Each definition can be reviewed in the Scoring Framework page. If a criterion is not assessed, it remains blank and does not reduce or increase the average.\n\nSource: Brand Scorecard scoring framework."}
+{"kind":"slide","id":"sl/9kphri","slide":5,"title":"DASHBOARD","textShapes":4}
+{"kind":"shape","id":"sh/5snixcnm","slide":5,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/ipwz2x4b","slide":5,"text":"DASHBOARD","textPreview":"DASHBOARD","textChars":9,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/3q50v25g","slide":5,"text":"Brand level overview","textPreview":"Brand level overview","textChars":20,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/sfy187md","slide":5,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/dg7i1cny","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"shape","id":"sh/qtwz6h47","slide":5,"bbox":[59,143,1162,510]}
+{"kind":"textbox","id":"sh/0jy1crm9","slide":5,"text":"The selector controls the indicators, decision matrix, recommendations, and table.","textPreview":"The selector controls the indicators, decision matrix, recommendations, and table.","textChars":82,"textLines":1,"bbox":[118,660,1040,32]}
+{"kind":"image","id":"im/yp4ni1ov","slide":5,"name":"","geometry":"roundRect","alt":"Overview with brand selector and brand indicators","bbox":[64,148,1152,500]}
+{"kind":"notes","id":"nt/9kphri","slide":5,"text":"The Overview now works at brand level. The user can select one or several brands. Each selected brand has its own expandable section with descriptive score, strategic score, completeness, recommendation, and status. The same filter also updates the charts and the recommendation table. This makes the page useful for both a focused brand review and a wider portfolio discussion.\n\nSource: Brand Scorecard Overview."}
+{"kind":"slide","id":"sl/x0qot9","slide":6,"title":"PORTFOLIO CONTROL","textShapes":6}
+{"kind":"shape","id":"sh/zqhwzuhg","slide":6,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/0rqdszy1","slide":6,"text":"PORTFOLIO CONTROL","textPreview":"PORTFOLIO CONTROL","textChars":17,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/lsje1kzm","slide":6,"text":"Portfolio register","textPreview":"Portfolio register","textChars":18,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/ql8vm5gz","slide":6,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/bmhwvahk","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"textbox","id":"sh/cnqdofy5","slide":6,"text":"A shared view of all active brands","textPreview":"A shared view of all active brands","textChars":34,"textLines":1,"bbox":[64,158,390,72]}
+{"kind":"textbox","id":"sh/dozexkza","slide":6,"text":"Filter by category, family, commercial owner, recommendation, or status.\nCompare completeness before a review meeting.\nSee the main scores and comments in one table.\nOpen the assessment page to update a record.","textPreview":"Filter by category, family, commercial owner, recommendation, or status. | Compare completeness before a review meeting. | See the main s...","textChars":210,"textLines":4,"bbox":[64,248,390,310]}
+{"kind":"textbox","id":"sh/2xovi5gn","slide":6,"text":"This screen creates a simple operating list for the commercial team.","textPreview":"This screen creates a simple operating list for the commercial team.","textChars":68,"textLines":1,"bbox":[64,584,390,64]}
+{"kind":"shape","id":"sh/3yxcrah8","slide":6,"bbox":[487,145,734,510]}
+{"kind":"image","id":"im/wjyxgrux","slide":6,"name":"","geometry":"roundRect","alt":"Portfolio register with filters and brand records","bbox":[492,150,724,500]}
+{"kind":"notes","id":"nt/x0qot9","slide":6,"text":"The Portfolio page gives the team one operating list. Users can filter by category, brand family, commercial owner, recommendation, and status. This helps the team prepare review meetings and focus on the records that need action. The table also shows completeness, which makes missing work easy to see. Users return to the assessment page when they need to update a brand.\n\nSource: Brand Scorecard Portfolio page."}
+{"kind":"slide","id":"sl/a8od8s","slide":7,"title":"ANALYSIS","textShapes":6}
+{"kind":"shape","id":"sh/vuh836h0","slide":7,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/wvq9wbil","slide":7,"text":"ANALYSIS","textPreview":"ANALYSIS","textChars":8,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/hwzq5gzq","slide":7,"text":"Multi-brand comparison","textPreview":"Multi-brand comparison","textChars":22,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/ix8ryl0b","slide":7,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/jyhs7qhw","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"shape","id":"sh/4zq90bih","slide":7,"bbox":[59,145,770,510]}
+{"kind":"textbox","id":"sh/61sr2l0n","slide":7,"text":"One chart, several brands","textPreview":"One chart, several brands","textChars":25,"textLines":1,"bbox":[866,165,330,54]}
+{"kind":"textbox","id":"sh/r21sbqh8","slide":7,"text":"Select up to eight brands.\nEach brand uses a different color.\nCompare five strategic pillars on one radar.\nUse the other tabs for ranking and heatmaps.","textPreview":"Select up to eight brands. | Each brand uses a different color. | Compare five strategic pillars on one radar. | Use the other tabs for r...","textChars":151,"textLines":4,"bbox":[866,244,320,270]}
+{"kind":"textbox","id":"sh/bi9cf29o","slide":7,"text":"The legend and hover details make each profile easy to identify.","textPreview":"The legend and hover details make each profile easy to identify.","textChars":64,"textLines":1,"bbox":[866,548,320,78]}
+{"kind":"image","id":"im/c7ylknux","slide":7,"name":"","geometry":"roundRect","alt":"Multi-brand strategic radar comparison","bbox":[64,150,760,500]}
+{"kind":"notes","id":"nt/a8od8s","slide":7,"text":"The Comparative Analysis page supports several views. This example shows the strategic profile radar. The user can select several brands, and each brand receives a different color. The chart compares attractiveness, operations, relationships, solvability, and execution fit. The other tabs provide a ranking, detailed descriptive scores, and strategic pillar heatmaps.\n\nSource: Brand Scorecard Comparative Analysis page."}
+{"kind":"slide","id":"sl/iaukik","slide":8,"title":"DATA STORAGE","textShapes":7}
+{"kind":"shape","id":"sh/gjy58vqx","slide":8,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/fy54zqpc","slide":8,"text":"DATA STORAGE","textPreview":"DATA STORAGE","textChars":12,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/uxwn6l8r","slide":8,"text":"Persistent SQLite database","textPreview":"Persistent SQLite database","textChars":26,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/twnmxg76","slide":8,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/sve54bql","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"textbox","id":"sh/7u54v6p0","slide":8,"text":"The database starts automatically with the app","textPreview":"The database starts automatically with the app","textChars":46,"textLines":1,"bbox":[64,156,430,82]}
+{"kind":"textbox","id":"sh/6twn218v","slide":8,"text":"Every save or update writes the complete assessment.\nBrand names stay unique in the database.\nThe app stores scoring settings as well as brand records.\nDB Browser for SQLite provides a direct read-only view.","textPreview":"Every save or update writes the complete assessment. | Brand names stay unique in the database. | The app stores scoring settings as well...","textChars":207,"textLines":4,"bbox":[64,255,420,290]}
+{"kind":"textbox","id":"sh/5snmtg7a","slide":8,"text":"Default file","textPreview":"Default file","textChars":12,"textLines":1,"bbox":[64,568,150,28]}
+{"kind":"textbox","id":"sh/kre50bqp","slide":8,"text":"data/brand_scorecard.db","textPreview":"data/brand_scorecard.db","textChars":23,"textLines":1,"bbox":[64,602,390,34]}
+{"kind":"shape","id":"sh/q9ozexkn","slide":8,"bbox":[510,145,711,510]}
+{"kind":"image","id":"im/0jmdozql","slide":8,"name":"","geometry":"roundRect","alt":"DB Browser for SQLite showing the Brand Scorecard database structure","bbox":[515,150,701,500]}
+{"kind":"notes","id":"nt/iaukik","slide":8,"text":"The application uses SQLite for persistent storage. There is no separate database server to start. The database file opens automatically when the app starts. Each save writes the full brand assessment, and the settings are stored in a separate table. DB Browser can open the file for inspection. Normal changes should still be made through the application, because the app protects the expected data structure.\n\nSource: database.py and local DB Browser view."}
+{"kind":"slide","id":"sl/8xiqy3","slide":9,"title":"DATA EXCHANGE","textShapes":14}
+{"kind":"shape","id":"sh/grq9ojql","slide":9,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/fqhsve90","slide":9,"text":"DATA EXCHANGE","textPreview":"DATA EXCHANGE","textChars":13,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/ep8rm98f","slide":9,"text":"Import and export","textPreview":"Import and export","textChars":17,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/t4zat4ru","slide":9,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/s3q9kzq9","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"shape","id":"sh/r2xsre9o","slide":9,"bbox":[59,145,750,510]}
+{"kind":"textbox","id":"sh/50fap4ry","slide":9,"text":"A flexible daily workflow","textPreview":"A flexible daily workflow","textChars":25,"textLines":1,"bbox":[846,164,340,50]}
+{"kind":"textbox","id":"sh/4z69gzqd","slide":9,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[846,244,42,40]}
+{"kind":"textbox","id":"sh/e14fyh8j","slide":9,"text":"Import","textPreview":"Import","textChars":6,"textLines":1,"bbox":[902,244,260,34]}
+{"kind":"textbox","id":"sh/z2dw7m94","slide":9,"text":"Load historical or batch data from CSV or Excel.","textPreview":"Load historical or batch data from CSV or Excel.","textChars":48,"textLines":1,"bbox":[902,280,270,56]}
+{"kind":"textbox","id":"sh/03mx0rqp","slide":9,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[846,356,42,40]}
+{"kind":"textbox","id":"sh/14ve9wra","slide":9,"text":"Work","textPreview":"Work","textChars":4,"textLines":1,"bbox":[902,356,260,34]}
+{"kind":"textbox","id":"sh/qdkfuh8n","slide":9,"text":"Review and update brands in the application.","textPreview":"Review and update brands in the application.","textChars":44,"textLines":1,"bbox":[902,392,270,56]}
+{"kind":"textbox","id":"sh/retw3m98","slide":9,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[846,468,42,40]}
+{"kind":"textbox","id":"sh/czmxwrqt","slide":9,"text":"Export","textPreview":"Export","textChars":6,"textLines":1,"bbox":[902,468,260,34]}
+{"kind":"textbox","id":"sh/d0ve5cry","slide":9,"text":"Create a CSV extract or a complete Excel review pack.","textPreview":"Create a CSV extract or a complete Excel review pack.","textChars":53,"textLines":1,"bbox":[902,504,270,56]}
+{"kind":"textbox","id":"sh/29kfqx8b","slide":9,"text":"The database remains the main source between imports and exports.","textPreview":"The database remains the main source between imports and exports.","textChars":65,"textLines":1,"bbox":[846,596,330,58]}
+{"kind":"image","id":"im/76dkbu90","slide":9,"name":"","geometry":"roundRect","alt":"Export page with CSV and Excel options","bbox":[64,150,740,500]}
+{"kind":"notes","id":"nt/8xiqy3","slide":9,"text":"Import and export remain available around the database. Import is useful for historical data or larger updates. The application then becomes the main place for daily work. Export creates a simple CSV file or a complete Excel review pack with scores, rankings, settings, and methodology. This gives the team flexibility without losing the persistent database.\n\nSource: Brand Scorecard Exports page and import workflow."}
+{"kind":"slide","id":"sl/caug5u","slide":10,"title":"GOVERNANCE","textShapes":16}
+{"kind":"shape","id":"sh/wjmp4zyx","slide":10,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/bidobuxc","slide":10,"text":"GOVERNANCE","textPreview":"GOVERNANCE","textChars":10,"textLines":1,"bbox":[64,34,500,24]}
+{"kind":"textbox","id":"sh/ah472pgr","slide":10,"text":"Controls and data safety","textPreview":"Controls and data safety","textChars":24,"textLines":1,"bbox":[64,63,1110,60]}
+{"kind":"shape","id":"sh/lof6h4fe","slide":10,"bbox":[64,128,1152,2]}
+{"kind":"textbox","id":"sh/kn6p8zyt","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1170,670,46,20]}
+{"kind":"textbox","id":"sh/jmxofuxo","slide":10,"text":"SAVE","textPreview":"SAVE","textChars":4,"textLines":1,"bbox":[78,175,130,26]}
+{"kind":"textbox","id":"sh/ylo76pg3","slide":10,"text":"Automatic persistence","textPreview":"Automatic persistence","textChars":21,"textLines":1,"bbox":[78,213,480,40]}
+{"kind":"textbox","id":"sh/tcz6l4fq","slide":10,"text":"Saved assessments remain available after the application closes.","textPreview":"Saved assessments remain available after the application closes.","textChars":64,"textLines":1,"bbox":[78,265,470,76]}
+{"kind":"shape","id":"sh/8b6pcjy5","slide":10,"bbox":[615,175,2,150]}
+{"kind":"textbox","id":"sh/ypwvmd8j","slide":10,"text":"UPDATE","textPreview":"UPDATE","textChars":6,"textLines":1,"bbox":[648,175,130,26]}
+{"kind":"textbox","id":"sh/zq5cvip4","slide":10,"text":"Controlled changes","textPreview":"Controlled changes","textChars":18,"textLines":1,"bbox":[648,213,480,40]}
+{"kind":"textbox","id":"sh/0redonqp","slide":10,"text":"Existing brands can be edited without creating duplicate records.","textPreview":"Existing brands can be edited without creating duplicate records.","textChars":65,"textLines":1,"bbox":[648,265,470,76]}
+{"kind":"textbox","id":"sh/lsnexs7a","slide":10,"text":"DELETE","textPreview":"DELETE","textChars":6,"textLines":1,"bbox":[78,390,130,26]}
+{"kind":"textbox","id":"sh/mtwvqx8v","slide":10,"text":"Explicit confirmation","textPreview":"Explicit confirmation","textChars":21,"textLines":1,"bbox":[78,428,480,40]}
+{"kind":"textbox","id":"sh/nu5wz2pg","slide":10,"text":"The delete button stays disabled until the user confirms the action.","textPreview":"The delete button stays disabled until the user confirms the action.","textChars":68,"textLines":1,"bbox":[78,480,470,76]}
+{"kind":"shape","id":"sh/8fyds7q1","slide":10,"bbox":[615,390,2,150]}
+{"kind":"textbox","id":"sh/9g7e1s76","slide":10,"text":"BACKUP","textPreview":"BACKUP","textChars":6,"textLines":1,"bbox":[648,390,130,26]}
+{"kind":"textbox","id":"sh/2xcvet8b","slide":10,"text":"Portable outputs","textPreview":"Portable outputs","textChars":16,"textLines":1,"bbox":[648,428,480,40]}
+{"kind":"textbox","id":"sh/3ylcnypw","slide":10,"text":"CSV and Excel exports support reviews and backup routines.","textPreview":"CSV and Excel exports support reviews and backup routines.","textChars":58,"textLines":1,"bbox":[648,480,470,76]}
+{"kind":"textbox","id":"sh/72hsfu5o","slide":10,"text":"Recommended rule: use the application for changes and DB Browser for inspection.","textPreview":"Recommended rule: use the application for changes and DB Browser for inspection.","textChars":80,"textLines":1,"bbox":[160,632,960,36]}
+{"kind":"notes","id":"nt/caug5u","slide":10,"text":"The project includes basic controls for safe daily use. Saving is automatic, and updates reuse the same brand record. Deleting a brand requires an explicit confirmation. Export files can support review meetings and backup routines. The recommended rule is simple: users should make changes in the application and use DB Browser only to inspect the database.\n\nSource: Brand Scorecard database and delete workflow."}
+{"kind":"slide","id":"sl/86emdt","slide":11,"title":"Business value and next steps","textShapes":6}
+{"kind":"textbox","id":"sh/upcbmxwf","slide":11,"text":"Business value and next steps","textPreview":"Business value and next steps","textChars":29,"textLines":1,"bbox":[70,58,950,64]}
+{"kind":"shape","id":"sh/hs3axcvq","slide":11,"bbox":[70,140,1140,2]}
+{"kind":"textbox","id":"sh/gruto7el","slide":11,"text":"Business value","textPreview":"Business value","textChars":14,"textLines":1,"bbox":[70,188,470,46]}
+{"kind":"textbox","id":"sh/3ulczmdw","slide":11,"text":"Faster preparation for brand review meetings.\nComparable scores across the full portfolio.\nClear ownership and visible assessment status.\nReusable data for analysis and reporting.","textPreview":"Faster preparation for brand review meetings. | Comparable scores across the full portfolio. | Clear ownership and visible assessment sta...","textChars":179,"textLines":4,"bbox":[70,252,500,300]}
+{"kind":"shape","id":"sh/itcbqhwb","slide":11,"bbox":[624,180,2,390]}
+{"kind":"textbox","id":"sh/5w3u1wv2","slide":11,"text":"Suggested next steps","textPreview":"Suggested next steps","textChars":20,"textLines":1,"bbox":[680,188,470,46]}
+{"kind":"textbox","id":"sh/4vutsreh","slide":11,"text":"Confirm the users and their access needs.\nChoose a shared deployment for the commercial team.\nAgree on a regular review and backup cycle.\nTrain users with a small set of real brands.","textPreview":"Confirm the users and their access needs. | Choose a shared deployment for the commercial team. | Agree on a regular review and backup cy...","textChars":182,"textLines":4,"bbox":[680,252,500,300]}
+{"kind":"textbox","id":"sh/zy1snids","slide":11,"text":"The result is one consistent process from assessment to decision.","textPreview":"The result is one consistent process from assessment to decision.","textChars":65,"textLines":1,"bbox":[70,615,1100,42]}
+{"kind":"notes","id":"nt/86emdt","slide":11,"text":"The main value is a faster and more consistent review process. The team can compare brands using the same method, see who owns each assessment, and reuse the data for reporting. The next step is to agree on the users, choose the shared deployment, define a review and backup cycle, and train the team with a small group of real brands. This will turn the tool into a regular commercial process.\n\nSource: project scope and recommended implementation steps."}
