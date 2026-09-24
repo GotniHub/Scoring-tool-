@@ -33,7 +33,7 @@ from database import (
 )
 
 
-APP_VERSION = "2.10"
+APP_VERSION = "2.11"
 ROOT_DIR = Path(__file__).resolve().parent
 LOGO_PATH = ROOT_DIR / "LOGO.png"
 LOGO_MARK_PATH = ROOT_DIR / "Logom.png"
@@ -737,46 +737,7 @@ def build_excel_export(
 # Streamlit presentation ----------------------------------------------------
 def apply_theme() -> None:
     st.markdown(
-        f"""
-        <style>
-        :root {{ --navy: {NAVY}; --blue: {BLUE}; --ink: {INK}; --muted: {MUTED}; }}
-        .stApp {{ background: linear-gradient(180deg, #F8FAFF 0%, #F4F6FA 100%); color: var(--ink);
-            font-family: "Segoe UI", Arial, sans-serif; }}
-        .block-container {{ max-width: 1440px; padding-top: 2.2rem; padding-bottom: 4rem; }}
-        [data-testid="stSidebar"] {{ background: #FFFFFF; border-right: 1px solid #E5E9F2; }}
-        [data-testid="stSidebar"] .block-container {{ padding-top: 1.5rem; }}
-        h1, h2, h3 {{ color: var(--navy); letter-spacing: -0.025em; font-family: "Segoe UI", Arial, sans-serif; }}
-        p, label, button, input, textarea, [data-testid="stCaptionContainer"] {{
-            color: var(--muted); font-family: "Segoe UI", Arial, sans-serif; }}
-        .app-hero {{
-            background: linear-gradient(125deg, {NAVY} 0%, {BLUE} 72%, {MID_BLUE} 100%);
-            border-radius: 22px; padding: 2.2rem 2.4rem; color: #FFFFFF;
-            box-shadow: 0 18px 40px rgba(24, 37, 65, 0.16); margin-bottom: 1.5rem;
-        }}
-        .app-hero .eyebrow {{ font-size: .76rem; text-transform: uppercase; letter-spacing: .14em;
-            font-weight: 700; opacity: .72; margin-bottom: .55rem; }}
-        .app-hero h1 {{ color: #FFFFFF; margin: 0; font-size: 2.15rem; line-height: 1.12; }}
-        .app-hero p {{ color: rgba(255,255,255,.78); max-width: 760px; margin: .7rem 0 0; font-size: 1rem; }}
-        .section-note {{ border-left: 3px solid {BLUE}; background: #FFFFFF; border-radius: 0 12px 12px 0;
-            padding: .85rem 1rem; color: {MUTED}; margin: .25rem 0 1rem; }}
-        div[data-testid="stMetric"] {{ background: #FFFFFF; border: 1px solid #E4E9F2; border-radius: 16px;
-            padding: 1rem 1.05rem; box-shadow: 0 8px 24px rgba(24,37,65,.055); }}
-        div[data-testid="stMetric"] label {{ color: {MUTED}; font-weight: 600; }}
-        div[data-testid="stMetricValue"] {{ color: {NAVY}; font-weight: 700; }}
-        div[data-testid="stForm"], div[data-testid="stExpander"] {{
-            background: rgba(255,255,255,.92); border: 1px solid #E4E9F2; border-radius: 16px;
-        }}
-        .stButton > button, .stDownloadButton > button {{ border-radius: 10px; font-weight: 650; min-height: 2.7rem; }}
-        .stButton > button[kind="primary"] {{ background: {BLUE}; border-color: {BLUE}; }}
-        .stTabs [data-baseweb="tab-list"] {{ gap: .45rem; background: #EDF1F7; border-radius: 12px; padding: .35rem; }}
-        .stTabs [data-baseweb="tab"] {{ border-radius: 9px; padding: .55rem .9rem; }}
-        .stTabs [aria-selected="true"] {{ background: #FFFFFF; color: {NAVY}; box-shadow: 0 3px 10px rgba(24,37,65,.08); }}
-        [data-testid="stDataFrame"] {{ border: 1px solid #E4E9F2; border-radius: 14px; overflow: hidden; }}
-        .score-legend {{ display:flex; gap:.8rem; flex-wrap:wrap; font-size:.82rem; color:{MUTED}; margin:.5rem 0 1rem; }}
-        .score-legend span {{ background:#FFFFFF; border:1px solid #E4E9F2; border-radius:999px; padding:.35rem .65rem; }}
-        a {{ color: {BLUE}; }}
-        </style>
-        """,
+        f"<style>{(ROOT_DIR / 'assets' / 'app.css').read_text(encoding='utf-8')}</style>",
         unsafe_allow_html=True,
     )
 
@@ -790,6 +751,16 @@ def render_hero(title: str, description: str, eyebrow: str = "Brand intelligence
             <p>{description}</p>
         </div>
         """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_section(eyebrow: str, title: str, description: str = "") -> None:
+    detail = f"<p>{description}</p>" if description else ""
+    st.markdown(
+        '<div class="section-heading">'
+        f'<div class="section-heading__eyebrow">{eyebrow}</div>'
+        f'<h2>{title}</h2>{detail}</div>',
         unsafe_allow_html=True,
     )
 
@@ -883,7 +854,7 @@ def _load_upload(uploaded: Any) -> tuple[pd.DataFrame | None, str | None]:
 
 def render_sidebar() -> str:
     st.logo(str(LOGO_PATH), icon_image=str(LOGO_MARK_PATH))
-    st.sidebar.markdown("### Brand Scorecard")
+    st.sidebar.markdown("### Brand intelligence")
     st.sidebar.caption(f"Decision workspace · v{APP_VERSION}")
     navigation = st.sidebar.radio(
         "Workspace",
@@ -891,6 +862,7 @@ def render_sidebar() -> str:
         label_visibility="collapsed",
     )
     st.sidebar.divider()
+    st.sidebar.caption("SCORING MODE")
     previous_weighting = bool(st.session_state.use_weighted)
     st.session_state.use_weighted = st.sidebar.toggle(
         "Weighted scoring",
@@ -900,37 +872,40 @@ def render_sidebar() -> str:
     if st.session_state.use_weighted != previous_weighting:
         _persist_configuration()
 
+    st.sidebar.divider()
+    st.sidebar.caption("DATA & CONNECTION")
     if st.session_state.get("database_available"):
         info = database_info()
-        st.sidebar.success(
-            f"{info['backend']} connected · {info['records']} brand(s)",
-            icon="✅",
+        st.sidebar.markdown(
+            '<div class="connection-card"><span class="connection-dot"></span>'
+            f"<span><strong>{info['backend']} connected</strong><small>{info['records']} brands saved</small></span></div>",
+            unsafe_allow_html=True,
         )
-        if st.sidebar.button("Refresh database", use_container_width=True):
-            _reload_database()
-            st.rerun()
     else:
         st.sidebar.error("Database unavailable · session mode active")
         if st.session_state.get("database_error"):
             st.sidebar.caption(st.session_state.database_error)
 
-    uploaded = st.sidebar.file_uploader("Import portfolio", type=["csv", "xlsx"])
-    if uploaded is not None:
-        fingerprint = f"{uploaded.name}:{uploaded.size}"
-        if st.session_state.get("last_upload") != fingerprint:
-            imported, error = _load_upload(uploaded)
-            if error:
-                st.sidebar.error(error)
-            else:
-                if st.session_state.get("database_available"):
-                    saved = upsert_assessments(imported.to_dict(orient="records"))
-                    _reload_database()
-                    st.sidebar.success(f"Imported and saved {saved} brand(s).")
+    with st.sidebar.expander("Data tools", expanded=False):
+        if st.button("Refresh database", use_container_width=True, disabled=not st.session_state.get("database_available")):
+            _reload_database()
+            st.rerun()
+        uploaded = st.file_uploader("Import portfolio", type=["csv", "xlsx"])
+        if uploaded is not None:
+            fingerprint = f"{uploaded.name}:{uploaded.size}"
+            if st.session_state.get("last_upload") != fingerprint:
+                imported, error = _load_upload(uploaded)
+                if error:
+                    st.error(error)
                 else:
-                    st.session_state.portfolio_df = imported
-                    st.sidebar.warning("Imported for this session only because the database is unavailable.")
-                st.session_state.last_upload = fingerprint
-    st.sidebar.caption("Source aligned with the shared BRAND ANALYSIS mind map.")
+                    if st.session_state.get("database_available"):
+                        saved = upsert_assessments(imported.to_dict(orient="records"))
+                        _reload_database()
+                        st.success(f"Imported and saved {saved} brand(s).")
+                    else:
+                        st.session_state.portfolio_df = imported
+                        st.warning("Imported for this session only because the database is unavailable.")
+                    st.session_state.last_upload = fingerprint
     return navigation
 
 
@@ -1026,7 +1001,7 @@ def page_overview() -> None:
         return
     selected = scored[scored["Brand name"].astype(str).isin(selected_brands)].copy()
 
-    st.subheader("Brand indicators")
+    render_section("Individual assessment", "Brand indicators", "Open a brand to see its own scores, interpretation and status.")
     for brand_index, (_, brand) in enumerate(selected.iterrows()):
         with st.expander(str(brand["Brand name"]), expanded=brand_index == 0):
             details = []
@@ -1294,6 +1269,7 @@ def page_evaluate() -> None:
     if delete_notice:
         st.success(delete_notice)
         del st.session_state["delete_notice"]
+    render_section("Assessment setup", "Choose and describe the brand", "Select an existing assessment to update it, or create a new brand.")
     portfolio = _portfolio_with_names()
     brand_names = portfolio["Brand name"].astype(str).tolist()
     target = st.selectbox("Assessment", ["Create a new brand", *brand_names])
@@ -1328,7 +1304,7 @@ def page_evaluate() -> None:
     ]
 
     if ADD_CATEGORY_OPTION in selected_category_values:
-        add_category_left, add_category_right = st.columns([4, 1])
+        add_category_left, add_category_right = st.columns([4, 1], vertical_alignment="bottom")
         new_category = add_category_left.text_input(
             "New strategic category",
             key=f"{prefix}_new_category",
@@ -1433,6 +1409,7 @@ def page_evaluate() -> None:
     ]
 
     with st.form(f"assessment_form_{prefix}", clear_on_submit=False):
+        st.markdown("#### Brand details")
         identity_left, identity_mid, identity_right = st.columns([1.35, 1, 0.8])
         brand_name = identity_left.text_input(
             "Brand name",
@@ -1447,7 +1424,10 @@ def page_evaluate() -> None:
         )
         status_default = _existing_value(row, "Status")
         status_index = STATUS_VALUES.index(status_default) if status_default in STATUS_VALUES else 0
-        status = identity_right.selectbox("Assessment status", STATUS_VALUES, index=status_index)
+        status = identity_right.selectbox(
+            "Assessment status", STATUS_VALUES, index=status_index,
+            help="Use To complete before work starts, In progress while scoring, Ready for review when evidence is ready, and Validated after approval.",
+        )
         brand_families = st.multiselect(
             "Brand families",
             valid_families,
@@ -1459,6 +1439,7 @@ def page_evaluate() -> None:
             ),
         )
 
+        st.markdown("#### Scores and evidence")
         tabs = st.tabs(["Brand profile", "Market fit", "Operations", "Relationships", "Solvability", "Execution fit"])
         values: dict[str, Any] = {}
         with tabs[0]:
@@ -1565,12 +1546,19 @@ def page_portfolio() -> None:
     if scored.empty:
         st.info("No brands are available yet. Create an assessment first.")
         return
-    filters = st.columns(5)
-    categories = filters[0].multiselect("Category", _unique_multi_values(scored["Strategic category"]))
-    families = filters[1].multiselect("Brand family", _unique_multi_values(scored["Brand family"]))
-    owners = filters[2].multiselect("Commercial owner", sorted(scored["Commercial owner"].dropna().unique()))
-    decisions = filters[3].multiselect("Recommendation", sorted(scored["Recommendation"].dropna().unique()))
-    statuses = filters[4].multiselect("Status", sorted(scored["Status"].dropna().unique()))
+    metrics = st.columns(3, gap="medium")
+    metrics[0].metric("Brands", len(scored))
+    metrics[1].metric("Ready for review", int(scored["Status"].eq("Ready for review").sum()))
+    metrics[2].metric("Validated", int(scored["Status"].eq("Validated").sum()))
+    render_section("Portfolio register", "Find the right assessments", "Combine filters to focus the table on the brands relevant to your review.")
+    with st.expander("Filter portfolio", expanded=True):
+        primary_filters = st.columns(3)
+        categories = primary_filters[0].multiselect("Strategic category", _unique_multi_values(scored["Strategic category"]))
+        families = primary_filters[1].multiselect("Brand family", _unique_multi_values(scored["Brand family"]))
+        owners = primary_filters[2].multiselect("Commercial owner", sorted(scored["Commercial owner"].dropna().unique()))
+        secondary_filters = st.columns(2)
+        decisions = secondary_filters[0].multiselect("Recommendation", sorted(scored["Recommendation"].dropna().unique()))
+        statuses = secondary_filters[1].multiselect("Assessment status", sorted(scored["Status"].dropna().unique()))
     filtered = scored.copy()
     if categories:
         filtered = filtered[
@@ -1586,6 +1574,10 @@ def page_portfolio() -> None:
         filtered = filtered[filtered["Recommendation"].isin(decisions)]
     if statuses:
         filtered = filtered[filtered["Status"].isin(statuses)]
+    st.caption(f"Showing {len(filtered)} of {len(scored)} brands")
+    if filtered.empty:
+        st.info("No brand matches these filters. Change or clear one or more filters to see results.")
+        return
     view = filtered[
         [
             "Brand name",
@@ -1624,6 +1616,7 @@ def page_analysis() -> None:
     if scored.empty:
         st.info("No scored brands are available yet.")
         return
+    render_section("Compare", "Choose brands to analyse", "Select up to eight brands. The charts use the same scores shown in the overview.")
     selected = st.multiselect(
         "Brands to compare",
         scored["Brand name"].tolist(),
@@ -1906,6 +1899,7 @@ def page_exports() -> None:
     if scored.empty:
         st.info("No assessed brands are available to export.")
         return
+    render_section("Review before download", "Portfolio export preview", "The table below shows the core scores and recommendation included in your report.")
     export_summary = scored[
         [
             "Brand name",
@@ -1929,22 +1923,27 @@ def page_exports() -> None:
         _portfolio_with_names(), st.session_state.weights, st.session_state.thresholds, st.session_state.use_weighted
     )
     stamp = datetime.now().strftime("%Y%m%d_%H%M")
+    render_section("Choose a format", "Share the assessment", "CSV is best for further analysis. The Excel review pack includes additional sheets and methodology.")
     csv_col, xlsx_col = st.columns(2)
-    csv_col.download_button(
-        "Download CSV",
-        csv_data,
-        file_name=f"brand_scorecard_{stamp}.csv",
-        mime="text/csv",
-        use_container_width=True,
-    )
-    xlsx_col.download_button(
-        "Download Excel review pack",
-        excel_data,
-        file_name=f"brand_scorecard_{stamp}.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        use_container_width=True,
-        type="primary",
-    )
+    with csv_col:
+        st.markdown('<div class="export-card"><div class="export-card__eyebrow">DATA FILE</div><h3>CSV portfolio</h3><p>A simple, reusable table for analysis and importing into other tools.</p></div>', unsafe_allow_html=True)
+        st.download_button(
+            "Download CSV",
+            csv_data,
+            file_name=f"brand_scorecard_{stamp}.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
+    with xlsx_col:
+        st.markdown('<div class="export-card"><div class="export-card__eyebrow">PRESENTATION FILE</div><h3>Excel review pack</h3><p>Portfolio, rankings, criteria, methodology and scoring settings in one workbook.</p></div>', unsafe_allow_html=True)
+        st.download_button(
+            "Download Excel review pack",
+            excel_data,
+            file_name=f"brand_scorecard_{stamp}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            use_container_width=True,
+            type="primary",
+        )
 
 
 def run_app() -> None:

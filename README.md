@@ -11,6 +11,7 @@ python -m streamlit run home.py
 
 The app supports:
 
+- a live home dashboard with portfolio counts, a three-step workflow and a recent-brand snapshot;
 - guided assessments across all descriptive and strategic criteria;
 - multi-select strategic categories, permanent custom category creation, and category-dependent brand families;
 - protected brand and custom-category deletion with explicit confirmation;
@@ -32,7 +33,7 @@ The application uses Supabase PostgreSQL whenever the `DATABASE_URL` secret is c
 - Deleting an existing brand requires explicit confirmation and removes its complete assessment.
 - CSV/XLSX imports are merged into the database by brand name.
 - Exports remain available for portfolio reviews, sharing and backups.
-- Use **Refresh database** in the sidebar to load changes saved by another active session.
+- Open **Data tools** in the sidebar and use **Refresh database** to load changes saved by another active session.
 
 To make the local application use the same Supabase database as the deployed application, create an untracked `.streamlit/secrets.toml` file:
 
@@ -67,6 +68,7 @@ The shared MindManager map remains the source reference. Any extra operational d
 ## Structure
 
 - `home.py` — landing page.
+- `assets/app.css` — shared visual design for the home page and scorecard interfaces.
 - `pages/Scorecard.py` — Streamlit multipage entry point.
 - `Scorecard.py` — standalone entry point.
 - `brand_scorecard.py` — shared data model, scoring engine, UI and exports.
