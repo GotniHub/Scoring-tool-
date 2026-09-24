@@ -33,7 +33,7 @@ from database import (
 )
 
 
-APP_VERSION = "2.8"
+APP_VERSION = "2.9"
 ROOT_DIR = Path(__file__).resolve().parent
 LOGO_PATH = ROOT_DIR / "LOGO.png"
 LOGO_MARK_PATH = ROOT_DIR / "Logom.png"
@@ -882,7 +882,10 @@ def render_sidebar() -> str:
 
     if st.session_state.get("database_available"):
         info = database_info()
-        st.sidebar.success(f"Database connected · {info['records']} brand(s)", icon="✅")
+        st.sidebar.success(
+            f"{info['backend']} connected · {info['records']} brand(s)",
+            icon="✅",
+        )
         if st.sidebar.button("Refresh database", use_container_width=True):
             _reload_database()
             st.rerun()

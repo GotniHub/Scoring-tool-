@@ -1,15 +1,50 @@
 import io
+import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import pandas as pd
 
 import brand_scorecard as app
 import database
+import migrate_to_supabase
 
 
 class ScorecardTests(unittest.TestCase):
+    def test_database_backend_uses_postgres_url_but_explicit_paths_remain_sqlite(self):
+        with tempfile.TemporaryDirectory() as temp_directory:
+            sqlite_path = Path(temp_directory) / "scorecard.db"
+            with patch.dict(
+                os.environ,
+                {"DATABASE_URL": "postgresql://example.invalid/postgres"},
+            ):
+                self.assertEqual(database.database_backend(), "PostgreSQL")
+                self.assertEqual(database.database_backend(sqlite_path), "SQLite")
+
+    def test_database_json_payload_converts_missing_values_to_null(self):
+        payload = database._json_payload(
+            {"pandas_missing": pd.NA, "float_nan": float("nan"), "value": 2}
+        )
+        self.assertEqual(
+            json.loads(payload),
+            {"pandas_missing": None, "float_nan": None, "value": 2},
+        )
+
+    def test_supabase_migration_builds_safe_session_pooler_url(self):
+        template = (
+            "postgresql://postgres.project-ref:[YOUR-PASSWORD]"
+            "@aws-1-eu-west-1.pooler.supabase.com:5432/postgres"
+        )
+        database_url = migrate_to_supabase.build_database_url(
+            template,
+            "Strong@Password#1!",
+        )
+        self.assertIn("Strong%40Password%231%21", database_url)
+        self.assertNotIn("[YOUR-PASSWORD]", database_url)
+
     def test_framework_contains_every_mindmap_branch(self):
         self.assertIn("Confectionery", app.CATEGORIES_FAMILIES["Retail"])
         self.assertIn("Adjacent", app.CATEGORIES_FAMILIES["Food service"])
