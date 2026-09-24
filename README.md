@@ -13,6 +13,7 @@ The app supports:
 
 - guided assessments across all descriptive and strategic criteria;
 - multi-select strategic categories, permanent custom category creation, and category-dependent brand families;
+- protected brand and custom-category deletion with explicit confirmation;
 - persistent PostgreSQL/Supabase storage in production, with SQLite as the local fallback;
 - a commercial-owner field for accountability and portfolio filtering;
 - an Overview brand filter with collapsible indicators for every selected brand;

@@ -33,7 +33,7 @@ from database import (
 )
 
 
-APP_VERSION = "2.9"
+APP_VERSION = "2.10"
 ROOT_DIR = Path(__file__).resolve().parent
 LOGO_PATH = ROOT_DIR / "LOGO.png"
 LOGO_MARK_PATH = ROOT_DIR / "Logom.png"
@@ -435,6 +435,22 @@ def strategic_category_options(
     return options
 
 
+def brands_using_category(portfolio: pd.DataFrame, category: str) -> list[str]:
+    """Return the brands currently assigned to a strategic category."""
+    if not isinstance(portfolio, pd.DataFrame) or portfolio.empty:
+        return []
+    target = category.strip().casefold()
+    matches: list[str] = []
+    for _, row in portfolio.iterrows():
+        categories = {
+            value.casefold() for value in parse_multi_value(row.get("Strategic category"))
+        }
+        brand_name = str(row.get("Brand name", "")).strip()
+        if target in categories and brand_name:
+            matches.append(brand_name)
+    return sorted(set(matches), key=str.casefold)
+
+
 def _unique_multi_values(series: pd.Series) -> list[str]:
     values = {item for value in series for item in parse_multi_value(value)}
     return sorted(values)
@@ -826,6 +842,10 @@ def init_state() -> None:
 
 def _reload_database() -> None:
     st.session_state.portfolio_df = migrate_portfolio(pd.DataFrame(load_assessments()))
+    if st.session_state.get("database_available"):
+        st.session_state.custom_strategic_categories = normalize_category_names(
+            load_setting("strategic_categories", [])
+        )
 
 
 def _persist_configuration() -> None:
@@ -1159,6 +1179,111 @@ def _criterion_select(criterion: str, row: pd.Series | None, prefix: str) -> str
     )
 
 
+@st.dialog("Delete brand permanently")
+def _confirm_brand_deletion(brand_name: str) -> None:
+    st.warning(
+        "This action permanently removes the brand and its complete assessment. "
+        "It cannot be undone."
+    )
+    st.write(f"Brand to delete: **{brand_name}**")
+    confirmation = st.text_input(
+        f'Type "{brand_name}" to confirm',
+        key=f"confirm_brand_delete_{brand_name}",
+    )
+    confirmed = confirmation.strip().casefold() == brand_name.strip().casefold()
+    cancel_col, delete_col = st.columns(2)
+    if cancel_col.button("Cancel", use_container_width=True):
+        st.rerun()
+    if delete_col.button(
+        "Delete permanently",
+        type="primary",
+        disabled=not confirmed,
+        use_container_width=True,
+    ):
+        try:
+            if st.session_state.get("database_available"):
+                deleted = delete_assessment(brand_name)
+                _reload_database()
+            else:
+                current = migrate_portfolio(st.session_state.portfolio_df)
+                match = current["Brand name"].astype(str).str.casefold().eq(brand_name.casefold())
+                deleted = bool(match.any())
+                st.session_state.portfolio_df = migrate_portfolio(
+                    current.loc[~match].reset_index(drop=True)
+                )
+            st.session_state.delete_notice = (
+                f"{brand_name} and its complete assessment were permanently deleted."
+                if deleted
+                else f"{brand_name} was already absent from the database."
+            )
+            st.rerun()
+        except Exception as exc:
+            st.error(f"The brand could not be deleted from the database: {exc}")
+
+
+@st.dialog("Delete custom category")
+def _confirm_category_deletion(
+    category: str,
+    category_widget_key: str,
+    pending_category_key: str,
+) -> None:
+    usage = brands_using_category(_portfolio_with_names(), category)
+    if usage:
+        st.error(
+            "This category cannot be deleted because it is assigned to "
+            f"{len(usage)} brand(s)."
+        )
+        st.write("Remove it from these assessments first:")
+        st.markdown("\n".join(f"- {brand}" for brand in usage))
+        if st.button("Close", use_container_width=True):
+            st.rerun()
+        return
+
+    st.warning(
+        "This permanently removes the custom category from the available category list. "
+        "It cannot be undone."
+    )
+    st.write(f"Category to delete: **{category}**")
+    confirmation = st.text_input(
+        f'Type "{category}" to confirm',
+        key=f"confirm_category_delete_{category}",
+    )
+    confirmed = confirmation.strip().casefold() == category.strip().casefold()
+    cancel_col, delete_col = st.columns(2)
+    if cancel_col.button("Cancel", key="cancel_category_delete", use_container_width=True):
+        st.rerun()
+    if delete_col.button(
+        "Delete permanently",
+        key="confirm_category_delete",
+        type="primary",
+        disabled=not confirmed,
+        use_container_width=True,
+    ):
+        custom_categories = [
+            item
+            for item in st.session_state.get("custom_strategic_categories", [])
+            if item.casefold() != category.casefold()
+        ]
+        try:
+            if st.session_state.get("database_available"):
+                save_setting("strategic_categories", custom_categories)
+            st.session_state.custom_strategic_categories = custom_categories
+            current_selection = st.session_state.get(category_widget_key, [])
+            st.session_state[pending_category_key] = [
+                item
+                for item in current_selection
+                if item.casefold() != category.casefold()
+            ]
+            st.session_state.category_notice = (
+                f"{category} was permanently deleted from the custom categories."
+                if st.session_state.get("database_available")
+                else f"{category} was deleted for this session only."
+            )
+            st.rerun()
+        except Exception as exc:
+            st.error(f"The category could not be deleted from the database: {exc}")
+
+
 def page_evaluate() -> None:
     render_hero(
         "Evaluate a brand",
@@ -1249,6 +1374,38 @@ def page_evaluate() -> None:
             st.success(category_notice)
         else:
             st.warning(category_notice)
+
+    with st.expander("Manage custom strategic categories"):
+        st.caption(
+            "The standard categories Retail, Beverage and Food service are protected. "
+            "Only manually created categories can be deleted."
+        )
+        custom_categories = st.session_state.get("custom_strategic_categories", [])
+        if not custom_categories:
+            st.info("No custom strategic category has been created yet.")
+        else:
+            category_to_manage = st.selectbox(
+                "Custom category",
+                custom_categories,
+                key=f"{prefix}_category_to_manage",
+            )
+            category_usage = brands_using_category(portfolio, category_to_manage)
+            if category_usage:
+                st.warning(
+                    f"Used by {len(category_usage)} brand(s): {', '.join(category_usage)}. "
+                    "Remove this category from those assessments before deleting it."
+                )
+            if st.button(
+                "Delete custom category",
+                key=f"{prefix}_open_category_delete",
+                disabled=bool(category_usage),
+                use_container_width=True,
+            ):
+                _confirm_category_deletion(
+                    category_to_manage,
+                    category_widget_key,
+                    pending_category_key,
+                )
 
     custom_category_selected = any(
         category not in CATEGORIES_FAMILIES for category in selected_categories
@@ -1345,37 +1502,14 @@ def page_evaluate() -> None:
     if row is not None:
         with st.expander("Delete this brand", icon="⚠️"):
             st.warning(
-                f"This permanently removes {target} and its complete assessment from the database."
-            )
-            delete_confirmed = st.checkbox(
-                f"I confirm that I want to delete {target}.",
-                key=f"{prefix}_confirm_delete",
+                f"Deleting {target} permanently removes its complete assessment from the database."
             )
             if st.button(
-                "Delete brand permanently",
-                disabled=not delete_confirmed,
-                key=f"{prefix}_delete",
+                "Review and delete brand",
+                key=f"{prefix}_open_delete",
                 use_container_width=True,
             ):
-                try:
-                    if st.session_state.get("database_available"):
-                        deleted = delete_assessment(str(target))
-                        _reload_database()
-                    else:
-                        current = migrate_portfolio(st.session_state.portfolio_df)
-                        match = current["Brand name"].astype(str).str.casefold().eq(str(target).casefold())
-                        deleted = bool(match.any())
-                        st.session_state.portfolio_df = migrate_portfolio(
-                            current.loc[~match].reset_index(drop=True)
-                        )
-                    st.session_state.delete_notice = (
-                        f"{target} was permanently deleted."
-                        if deleted
-                        else f"{target} was already absent from the database."
-                    )
-                    st.rerun()
-                except Exception as exc:
-                    st.error(f"The brand could not be deleted from the database: {exc}")
+                _confirm_brand_deletion(str(target))
 
     if submitted:
         cleaned_name = brand_name.strip()

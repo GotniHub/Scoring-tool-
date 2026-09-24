@@ -179,6 +179,19 @@ class ScorecardTests(unittest.TestCase):
         )
         self.assertNotIn(app.ADD_CATEGORY_OPTION, options)
 
+    def test_category_usage_lists_affected_brands_case_insensitively(self):
+        portfolio = pd.DataFrame(
+            [
+                {"Brand name": "Alpha", "Strategic category": "Retail | Hospitality"},
+                {"Brand name": "Beta", "Strategic category": "hospitality"},
+                {"Brand name": "Gamma", "Strategic category": "Beverage"},
+            ]
+        )
+        self.assertEqual(
+            app.brands_using_category(portfolio, "Hospitality"),
+            ["Alpha", "Beta"],
+        )
+
     def test_excel_export_contains_review_pack_sheets(self):
         record = {column: pd.NA for column in app.INPUT_COLUMNS}
         record.update({"Brand name": "Export Test", "Positioning": 4, "Performance": 2})
