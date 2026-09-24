@@ -305,6 +305,7 @@ div[data-testid="stMetric"] {
 }
 div[data-testid="stMetricLabel"] { color: var(--ad-muted); }
 div[data-testid="stMetricValue"] { color: var(--ad-navy); font-weight: 730; }
+div[data-testid="stMetricValue"] p { color: #111111; }
 
 div[data-testid="stForm"],
 div[data-testid="stExpander"] {
