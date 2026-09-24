@@ -304,7 +304,10 @@ div[data-testid="stMetric"] {
   min-height: 112px;
 }
 div[data-testid="stMetricLabel"] { color: var(--ad-muted); }
-div[data-testid="stMetricValue"] { color: var(--ad-navy); font-weight: 730; }
+/* Streamlit versions may wrap the value in a <p>; style the text itself too. */
+[data-testid="stMetricValue"] { font-weight: 730; }
+[data-testid="stMetricValue"],
+[data-testid="stMetricValue"] * { color: var(--ad-navy) !important; }
 
 div[data-testid="stForm"],
 div[data-testid="stExpander"] {

@@ -33,7 +33,7 @@ from database import (
 )
 
 
-APP_VERSION = "2.11"
+APP_VERSION = "2.12"
 ROOT_DIR = Path(__file__).resolve().parent
 LOGO_PATH = ROOT_DIR / "LOGO.png"
 LOGO_MARK_PATH = ROOT_DIR / "Logom.png"
